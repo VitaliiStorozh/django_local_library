@@ -1,0 +1,50 @@
+{% extends "base.html" %} }
+
+{% block content %}
+    <h2>User</h2>
+    <table class="table">
+        <tr>
+            <th scope="row">First name</th>
+            <td>{{ user.first_name }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Last name</th>
+            <td>{{ user.last_name }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Middle name</th>
+            <td>{{ user.middle_name }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Email</th>
+            <td>{{ user.email }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Created at</th>
+            <td>{{ user.created_at }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Updated at</th>
+            <td>{{ user.updated_at }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Role</th>
+            <td>{{ user.get_role_name }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Is active</th>
+            <td>{{ user.is_active }}</td>
+        </tr>
+    </table>
+    <a class="btn btn-outline-primary" href="{% url "get_users" %}">Back</a>
+    <a class="btn btn-outline-warning" href="{% url "update" user.id %}">Edit</a>
+    <a class="btn btn-outline-danger" href="{% url "delete_user" user.id %}">Delete</a>
+    <a class="btn btn-outline-secondary" href="{% url "change_role" user.id %}">Change role</a>
+    <a class="btn btn-outline-dark" href="{% url "block" user.id %}">
+        {% if user.is_active %}
+            Block
+        {% else %}
+            Unblock
+        {% endif %}
+    </a>
+{% endblock content %}
