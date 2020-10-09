@@ -1,0 +1,38 @@
+{% extends "base.html" %} }
+
+{% block content %}
+    <h2>Orders</h2>
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Created at</th>
+            <th scope="col">End at</th>
+            <th scope="col">User email</th>
+            <th scope="col">Book name</th>
+            <th scope="col">Book authors</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for element in orders %}
+            <tr>
+                <td>{{ element.created_at }}</td>
+                <td>{{ element.plated_end_at }}</td>
+                <td>{{ element.user.email }}</td>
+                <td>{{ element.book.name }}</td>
+                <td>
+                    {% for author in element.book.authors.all %}
+                        <li>
+                            {{ author.surname }}
+                            {{ author.name }}
+                            {{ author.patronymic }}
+                        </li>
+                    {% endfor %}
+                </td>
+                <td>
+                    <a class="btn btn-outline-danger" href="{% url "delete_order" element.id %}">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}
